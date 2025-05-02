@@ -1,0 +1,27 @@
+// function Register() {
+//   const [form, setForm] = useState({ name: "", email: "", password: "" });
+//   const navigate = useNavigate();
+
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const res = await axios.post("http://localhost:8000/api/register", form);
+
+//       if (res.status === 201) {
+//         alert("Movie added Successfully!");
+
+//         // Clear the form
+//         setForm({ name: "", email: "", password: "" });
+
+//         // Redirect to /login
+//         navigate("/login");
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert("Movie Addition Failed!");
+//     }
+//   };

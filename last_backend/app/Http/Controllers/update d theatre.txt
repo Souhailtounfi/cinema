@@ -1,0 +1,24 @@
+<!-- 
+    // Update theater
+    public function update(Request $request, $id)
+    {
+        $theater = Theater::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'capacity' => 'required|integer|min:1',
+        ]);
+
+        $theater->update($request->only('name', 'capacity'));
+
+        return response()->json($theater);
+    }
+
+    // Delete theater
+    public function destroy($id)
+    {
+        $theater = Theater::findOrFail($id);
+        $theater->delete();
+
+        return response()->json(['message' => 'Theater deleted successfully.']);
+    } -->

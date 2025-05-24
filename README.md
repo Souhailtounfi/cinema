@@ -1,4 +1,4 @@
-# 🎬 Système de Réservation de Billets de Cinéma ( Mazagan Screenverse>
+# 🎬 Système de Réservation de Billets de Cinéma (Mazagan Screenverse)
 
 Ce projet est une application web complète de réservation de billets de cinéma, développée avec Laravel v12 pour le backend et React.js pour le frontend.
 

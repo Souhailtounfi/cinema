@@ -32,7 +32,7 @@ Ce projet est une application web complète de réservation de billets de ciném
 - PHP >= 8.1
 - Composer
 - Node.js et npm
-- MySQL ou autre base de données
+- MySQL
 
 ### Étapes pour le Backend (Laravel)
 cd last_backend

@@ -49,6 +49,7 @@ Route::post('/addTheater', [TheaterController::class, 'addTheater']);
 
 // Admin-only routes
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    //MODIFICATION NDIRHOM MN B3D
     // Movie management
     
     // Showtime management

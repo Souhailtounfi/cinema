@@ -8,7 +8,7 @@ Ce projet est une application web complète de réservation de billets de ciném
 - Liste des films disponibles avec leurs détails
 - Sélection d'une séance (date et heure)
 - Réservation d'une place
-- Génération automatique d'un **PDF avec code QR** pour le billet
+- Génération automatique d'un PDF avec code QR pour le billet
 - Interface utilisateur moderne et réactive
 
 ## 🛠️ Technologies Utilisées
@@ -18,7 +18,7 @@ Ce projet est une application web complète de réservation de billets de ciném
 - API RESTful
 - Base de données MySQL 
 - Génération de PDF avec `jspdf` 
-- Génération de Qr code avec `jspdf` 
+- Génération de Qr code avec `qrcode` library.
 
 ### Frontend :
 - React.js

@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Register() {
+export default function AddAdmin() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    role: 'admin'
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function Register() {
 
   return (
     <div className="max-w-md mx-auto mt-50 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-6">Register</h2>
+      <h2 className="text-2xl font-bold mb-6">Add Admin</h2>
       {error && <div className="text-red-500 mb-4">{error}</div>}
       
       <form onSubmit={handleSubmit}>

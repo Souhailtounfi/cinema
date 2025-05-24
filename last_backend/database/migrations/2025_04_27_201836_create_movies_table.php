@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('duration_minutes')->nullable();
             $table->date('release_date')->nullable();
             $table->string('poster_url', 150)->nullable()->unique();
+            $table->string('trailer_url', 150)->nullable()->unique();
             $table->timestamps();
         });
     }

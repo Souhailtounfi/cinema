@@ -16,6 +16,7 @@ class MovieController extends Controller
             'duration_minutes'=>$request->duration,
             'release_date' => $request->release_date,
             'poster_url' => $request->poster_url,
+            'trailer_url' => $request->trailer_url,
         ]);
 
         
@@ -37,6 +38,7 @@ class MovieController extends Controller
             'duration_minutes' => $request->duration,
             'release_date' => $request->release_date,
             'poster_url' => $request->poster_url,
+            'trailer_url' => $request->trailer_url,
         ]);
 
         return response()->json(['message' => 'Movie updated successfully']);

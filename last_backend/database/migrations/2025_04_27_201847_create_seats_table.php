@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id('seat_id');
-            $table->foreignId('theater_id')->constrained('theaters', 'theater_id')->onDelete('cascade');
-            $table->char('seat_row', 1);
-            $table->integer('seat_number');
+            $table->foreignId('theater_id')->constrained('theaters', 'id')->onDelete('cascade');
+            $table->char('seat_number', 4);
             $table->timestamps();
         });
     }

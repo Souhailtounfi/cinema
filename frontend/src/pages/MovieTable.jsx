@@ -97,7 +97,7 @@ function MovieTable() {
                       <img
                         src={movie.poster_url}
                         alt={movie.title}
-                        className="w-16 h-auto object-cover w-30"
+                        className="h-auto object-cover w-30"
                       />
                     </td>
                     <td className="p-3">{movie.title}</td>

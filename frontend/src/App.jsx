@@ -1,33 +1,39 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from "./components/Navbar.jsx";
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import AddMovies from './pages/AddMovies';
-import AddShowtime from './pages/AddShowtime';
-import Theater from './pages/Theater';
-import MovieTable from './pages/MovieTable';
-import EditMovie from './pages/EditMovie';
-import Booking from './pages/Booking.jsx';
-import Showtimes from './pages/Showtimes.jsx';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import AddMovies from "./pages/AddMovies";
+import AddShowtime from "./pages/AddShowtime";
+import Theater from "./pages/Theater";
+import MovieTable from "./pages/MovieTable";
+import EditMovie from "./pages/EditMovie";
+import Showtimes from "./pages/Showtimes";
+import AddAdmin from "./pages/AddAdmin";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/addMovies" element={<AddMovies />} />
-        <Route path="/addShowtime" element={<AddShowtime />} />
-        <Route path="/showtimes/:movieId" element={<Showtimes />} />
-        <Route path="/theaters" element={<Theater />} />
-        <Route path="/movies" element={<MovieTable />} />
-        <Route path="/editMovie/:id" element={<EditMovie />} />
-        <Route path="/booking" element={<Booking />} />
-      </Routes>
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/addAdmin" element={<AddAdmin />} />
+          <Route path="/addMovies" element={<AddMovies />} />
+          <Route path="/addShowtimes" element={<AddShowtime />} />
+          <Route path="/addTheaters" element={<Theater />} />
+
+          <Route path="/showtimes/:movieId" element={<Showtimes />} />
+          <Route path="/movies" element={<MovieTable />} />
+          <Route path="/editMovie/:id" element={<EditMovie />} />
+
+          <Route path="/booking/:id" element={<Booking />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

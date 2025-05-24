@@ -72,7 +72,7 @@ function Theater() {
             <input
               type="number"
               name="capacity"
-              placeholder="Seat Capacity"
+              placeholder="Seat Capacity (Between 15-390)"
               min="10"
               value={form.capacity}
               onChange={handleChange}

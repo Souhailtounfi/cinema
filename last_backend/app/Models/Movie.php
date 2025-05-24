@@ -14,6 +14,7 @@ class Movie extends Model
         'duration_minutes',
         'release_date',
         'poster_url',
+        'trailer_url',
     ];
 
     public function showtimes()

@@ -8,6 +8,7 @@ use App\Models\Movie;
 use App\Models\Theater;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Seat;
 
 class ShowtimeController extends Controller
 {
@@ -80,20 +81,21 @@ class ShowtimeController extends Controller
         return response()->json(
             $showtimes->map(function ($showtime) use ($theaters, $movies) {
                 return [
-                    'showtime_id' => $showtime->showtime_id,
+                    'showtime_id' => $showtime->id,
                     'movie_title' => $movies[$showtime->movie_id]->title ?? null,
                     'theater_name' => $theaters[$showtime->theater_id]->name ?? null,
                     'show_date' => $showtime->show_date,
                     'show_time' => $showtime->show_time,
+                    'showtime_seats' => Seat::where('theater_id', $showtime->theater_id)->get()->map(function ($seat) {
+                        return [
+                            'seat_id' => $seat->seat_id,
+                            'seat_number' => $seat->seat_number,
+                        ];
+                    }),
                 ];
             })
         )->setStatusCode(200);
-        
-
-
     }
 
-   
 
-        
 }

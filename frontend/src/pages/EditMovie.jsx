@@ -11,7 +11,8 @@ function EditMovie() {
     description: "",
     duration: "",
     release_date: "",
-    poster_url: ""
+    poster_url: "",
+    trailer_url: ""
   });
 
   useEffect(() => {
@@ -22,7 +23,8 @@ function EditMovie() {
         description: movie.description,
         duration: movie.duration_minutes,
         release_date: movie.release_date,
-        poster_url: movie.poster_url
+        poster_url: movie.poster_url,
+        trailer_url: movie.trailer_url
       });
     }).catch(() => alert("Failed to load movie data"));
   }, [id]);
@@ -52,6 +54,7 @@ function EditMovie() {
           <input type="number" name="duration" value={form.duration} onChange={handleChange} placeholder="Duration (minutes)" required className="w-full p-2 border rounded" />
           <input type="date" name="release_date" value={form.release_date} onChange={handleChange} required className="w-full p-2 border rounded" />
           <input type="url" name="poster_url" value={form.poster_url} onChange={handleChange} placeholder="Poster URL" required className="w-full p-2 border rounded" />
+          <input type="url" name="trailer_url" value={form.trailer_url} onChange={handleChange} placeholder="Trailer URL" required className="w-full p-2 border rounded" />
 
           <button type="submit" className="w-full bg-cyan-600 text-white py-2 rounded hover:bg-cyan-700">
             Update Movie

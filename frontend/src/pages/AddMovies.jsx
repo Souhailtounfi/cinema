@@ -47,6 +47,7 @@ function AddMovies() {
           <input type="number" name="duration" placeholder="Duration (minutes)" value={form.duration} onChange={handleChange} required className="w-full p-2 border rounded" />
           <input type="date" name="release_date" value={form.release_date} onChange={handleChange} required className="w-full p-2 border rounded" />
           <input type="url" name="poster_url" placeholder="Poster URL" value={form.poster_url} onChange={handleChange} required className="w-full p-2 border rounded" />
+          <input type="url" name="trailer_url" placeholder="Trailer URL" value={form.trailer_url} onChange={handleChange} required className="w-full p-2 border rounded" />
 
           <button type="submit" className="w-full bg-cyan-600 text-white py-2 rounded hover:bg-cyan-700">
             ADD MOVIE

@@ -15,12 +15,12 @@ class TheaterController extends Controller
         return response()->json($theaters);
     }
 
-    // Store new theater with automatic seat generation
+    // Store new theater with automatic seat generation max390 bach tji 15*26
     public function addTheater(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:50|unique:theaters',
-            'capacity' => 'required|integer|min:10|max:350'
+            'capacity' => 'required|integer|min:15|max:390'
         ]);
 
         if ($validator->fails()) {

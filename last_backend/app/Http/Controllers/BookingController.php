@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    // ✅ Get available seats for a specific showtime
+    // ✅ Return available seats (not booked yet)
     public function getBookedSeats(Showtime $showtime)
     {
         $showtime->load('theater');
@@ -20,14 +20,20 @@ class BookingController extends Controller
 
         $availableSeats = Seat::where('theater_id', $showtime->theater_id)
             ->whereNotIn('seat_id', $bookedSeatIds)
-            ->pluck('seat_id', 'seat_number'); // { "A1": 1, "A2": 2, ... }
+            ->get()
+            ->map(function ($seat) {
+                return [
+                    'seat_id' => $seat->seat_id,
+                    'seat_number' => $seat->seat_number,
+                ];
+            });
 
         return response()->json([
             'available_seats' => $availableSeats
         ]);
     }
 
-    // ✅ Store a single seat booking
+    // ✅ Book a single seat
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,13 +47,12 @@ class BookingController extends Controller
                 'user_id' => $validated['user_id'],
                 'showtime_id' => $validated['showtime_id'],
                 'seat_id' => $validated['seat_id'],
-                'total_price' => 12, // static price or fetch dynamically
             ]);
 
             return response()->json([
                 'booking_id' => $booking->id,
                 'message' => 'Booking successful',
-            ]);
+            ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Booking failed: ' . $e->getMessage(),
@@ -55,7 +60,7 @@ class BookingController extends Controller
         }
     }
 
-    // ✅ Show booking details
+    // ✅ Get a specific booking
     public function show(Booking $booking)
     {
         $booking->load(['showtime.movie', 'showtime.theater', 'seat']);
@@ -66,10 +71,9 @@ class BookingController extends Controller
             'theater_name' => $booking->showtime->theater->name,
             'show_date' => $booking->showtime->show_date,
             'show_time' => $booking->showtime->show_time,
-            'total_price' => $booking->total_price,
             'seat' => [
-                'seat_row' => $booking->seat->seat_row,
-                'seat_number' => $booking->seat->seat_number,
+                'seat_row' => $booking->seat->seat_row ?? null,
+                'seat_number' => $booking->seat->seat_number ?? null,
             ],
         ]);
     }

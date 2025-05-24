@@ -12,4 +12,14 @@ class Seat extends Model
     {
         return $this->belongsTo(Theater::class);
     }
+
+    public function showtimes()
+    {
+        return $this->belongsToMany(Showtime::class, 'showtime_seats');
+    }
+
+    public function bookings()
+    {
+        return $this->belongsToMany(Booking::class, 'booking_seats');
+    }
 }

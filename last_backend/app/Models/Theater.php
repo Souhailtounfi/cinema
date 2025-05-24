@@ -31,32 +31,25 @@ class Theater extends Model
         return $this->hasMany(Seat::class);
     }
 
+    //ngenerer seats f kol theater 
     public function generateSeats()
     {
         $capacity = $this->capacity;
-        $rows = $this->calculateOptimalRows($capacity);
-        $seatsPerRow = ceil($capacity / $rows);
-        
-        $totalSeats = 0;
-        $rowLetters = range('A', 'Z'); // Support up to 26 rows
+        $seatsPerRow = 15;
+        $rowLetters = range('A', 'Z'); // Up to 26 rows (390 seats max)
 
-        for ($i = 0; $i < $rows && $totalSeats < $capacity; $i++) {
+        $totalSeats = 0;
+        $rowIndex = 0;
+
+        while ($totalSeats < $capacity && $rowIndex < count($rowLetters)) {
             for ($seatNum = 1; $seatNum <= $seatsPerRow && $totalSeats < $capacity; $seatNum++) {
                 $this->seats()->create([
-                    'seat_row' => $rowLetters[$i],
-                    'seat_number' => $seatNum
+                    'seat_number' => $rowLetters[$rowIndex] . $seatNum
                 ]);
                 $totalSeats++;
             }
+            $rowIndex++;
         }
     }
 
-    protected function calculateOptimalRows($capacity)
-    {
-        // Calculate base rows (15 seats per row)
-        $baseRows = ceil($capacity / 15);
-        
-        // Constrain between 10-15 rows
-        return max(10, min(15, $baseRows));
-    }
 }

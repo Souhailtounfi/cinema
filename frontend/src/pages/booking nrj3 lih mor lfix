@@ -1,0 +1,114 @@
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import axios from "axios";
+import jsPDF from "jspdf";
+import QRCode from "qrcode";
+import { useAuth } from "../context/AuthContext";
+
+const Booking = () => {
+  const { user } = useAuth();
+  const { id } = useParams();
+  const location = useLocation();
+  const { movie_title, date, time, theater } = location.state || {};
+
+  const [availableSeats, setAvailableSeats] = useState([]);
+  const [selectedSeat, setSelectedSeat] = useState("");
+
+  useEffect(() => {
+    console.log("Showtime ID:", id);
+
+    if (!id) return;
+    axios
+      .get(`http://localhost:8000/api/showtimes/${id}/booked-seats`)
+      .then((res) => {
+        setAvailableSeats(res.data.available_seats);
+      })
+      .catch(() => alert("Failed to fetch available seats"));
+  }, [id]);
+
+  const handleBook = async () => {
+    const bookingDetails = {
+      user,
+      movie_title,
+      date,
+      time,
+      theater,
+      seat: selectedSeat,
+    };
+
+    const pdf = new jsPDF();
+    const text = `Booking Details:\nUser: ${user}\nMovie: ${movie_title}\nDuration: ${duration} min\nTheater: ${theater}\nSeat: ${selectedSeat}`;
+    pdf.text(text, 20, 30);
+
+    const qrData = JSON.stringify(bookingDetails);
+    const qrUrl = await QRCode.toDataURL(qrData);
+    pdf.addImage(qrUrl, "PNG", 20, 60, 50, 50);
+
+    pdf.save("booking.pdf");
+  };
+
+  return (
+    <div className="flex justify-center items-center py-10 bg-gray-100 min-h-screen">
+      <div className="bg-white p-8 shadow rounded-lg w-full max-w-md">
+        <h3 className="text-center text-2xl font-bold mb-6">Book Your Seat</h3>
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleBook();
+          }}
+        >
+          <input
+            type="text"
+            name="user"
+            value={user}
+            disabled
+            required
+            className="w-full p-2 border rounded"
+          />
+          <input
+            type="text"
+            value={movie_title}
+            disabled
+            className="w-full p-2 border rounded bg-gray-100"
+          />
+          <input
+            type="text"
+            value={date}
+            disabled
+            className="w-full p-2 border rounded bg-gray-100"
+          />
+          <input
+            type="text"
+            value={time}
+            disabled
+            className="w-full p-2 border rounded bg-gray-100"
+          />
+
+          <select
+            value={selectedSeat}
+            onChange={(e) => setSelectedSeat(e.target.value)}
+            required
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Choose a seat</option>
+            {availableSeats.map((seat) => (
+              <option key={seat} value={seat}>
+                {seat}
+              </option>
+            ))}
+          </select>
+
+          <button
+            type="submit"
+            className="w-full bg-cyan-600 text-white py-2 rounded hover:bg-cyan-700"
+          >
+            Book & Download PDF
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Booking;

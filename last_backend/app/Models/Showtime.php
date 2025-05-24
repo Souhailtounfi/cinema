@@ -19,4 +19,21 @@ class Showtime extends Model
     {
         return $this->belongsTo(Movie::class, 'movie_id', 'id');
     }
+
+    public function seats()
+    {
+        return $this->belongsToMany(Seat::class, 'showtime_seats', 'showtime_id', 'seat_id');
+    }
+
+    public function theater()
+    {
+        return $this->belongsTo(Theater::class, 'theater_id', 'id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    
 }

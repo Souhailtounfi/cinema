@@ -2,7 +2,7 @@
 
 Ce projet est une application web complète de réservation de billets de cinéma, développée avec Laravel v12 pour le backend et React.js pour le frontend.
 
-## 📌 Fonctionnalités
+## Fonctionnalités
 
 - Authentification des utilisateurs (inscription / connexion)
 - Liste des films disponibles avec leurs détails
@@ -11,7 +11,7 @@ Ce projet est une application web complète de réservation de billets de ciném
 - Génération automatique d'un PDF avec code QR pour le billet
 - Interface utilisateur moderne et réactive
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 ### Backend :
 - Laravel 12
@@ -26,7 +26,7 @@ Ce projet est une application web complète de réservation de billets de ciném
 - Tailwind CSS
 - Axios pour la communication avec l'API
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 - PHP >= 8.1
